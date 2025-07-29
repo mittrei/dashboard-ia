@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise Estratégica: IA na LEADedu</title>
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons via CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Chart.js e Plugin de Datalabels via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+
+
+    <!-- Configuração customizada do Tailwind e Fontes -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#4f46e5', // Indigo-600
+                            'light': '#a5b4fc', // Indigo-300
+                            'extralight': '#e0e7ff', // Indigo-100
+                        },
+                        muted: {
+                            foreground: '#6b7280' // Gray-500
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+        @import url('https://rsms.me/inter/inter.css');
+        .card {
+            background-color: white;
+            border-radius: 1.25rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -4px rgb(0 0 0 / 0.07);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 space-y-12">
+
+        <!-- Cabeçalho -->
+        <header class="space-y-3">
+            <h1 class="text-3xl md:text-4xl font-bold tracking-tight">Análise Estratégica: IA na LEADedu</h1>
+            <p class="text-lg text-muted-foreground">Um diagnóstico do nosso uso de IA e o caminho para uma comunidade de prática</p>
+        </header>
+
+        <!-- Seção de Métricas Principais (KPIs) -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="card space-y-2">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-sm font-medium text-muted-foreground">Adoção frequente</h3>
+                    <i data-lucide="trending-up" class="h-5 w-5 text-primary"></i>
+                </div>
+                <div class="text-4xl font-bold">67%</div>
+            </div>
+            <div class="card space-y-2">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-sm font-medium text-muted-foreground">Participantes</h3>
+                    <i data-lucide="users" class="h-5 w-5 text-primary"></i>
+                </div>
+                <div class="text-4xl font-bold">19</div>
+            </div>
+            <div class="card space-y-2">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-sm font-medium text-muted-foreground">Dispostos a compartilhar</h3>
+                    <i data-lucide="share-2" class="h-5 w-5 text-primary"></i>
+                </div>
+                <div class="text-4xl font-bold">4</div>
+            </div>
+            <div class="card space-y-2">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-sm font-medium text-muted-foreground">Demanda por oficinas</h3>
+                    <i data-lucide="school" class="h-5 w-5 text-primary"></i>
+                </div>
+                <div class="text-4xl font-bold">84%</div>
+            </div>
+        </section>
+
+        <!-- Seção de Gráficos -->
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="card lg:col-span-1">
+                <h3 class="text-lg font-semibold mb-4">Como usamos hoje</h3>
+                <div class="h-[30rem]"><canvas id="frequencyChart"></canvas></div>
+            </div>
+            <div class="card lg:col-span-2 space-y-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-2">Quais ferramentas dominam</h3>
+                    <div class="h-60"><canvas id="toolsChart"></canvas></div>
+                </div>
+                 <div>
+                    <h3 class="text-lg font-semibold mb-2">Para quais atividades mais usamos</h3>
+                    <div class="h-60"><canvas id="useCasesChart"></canvas></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BLOCO: Maturidade em ação -->
+        <section class="space-y-6">
+            <div class="text-left">
+                <h2 class="text-2xl font-bold tracking-tight">Maturidade em ação</h2>
+                <p class="text-muted-foreground">Exemplos de como a equipe já aplica IA de forma estratégica</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                 <div class="card space-y-3">
+                    <div class="flex items-center gap-3"><div class="p-3 bg-primary-extralight rounded-full inline-block"><i data-lucide="rocket" class="h-6 w-6 text-primary"></i></div><div><h3 class="font-semibold">Bruna Almeida</h3><span class="text-xs bg-slate-100 text-slate-600 font-medium px-2 py-1 rounded-full">CS</span></div></div>
+                    <ul class="space-y-1 text-sm text-muted-foreground list-disc list-inside"><li>Análise de dados de clientes</li><li>Customização de jornadas</li><li>Prototipagem de soluções</li></ul>
+                </div>
+                 <div class="card space-y-3">
+                    <div class="flex items-center gap-3"><div class="p-3 bg-primary-extralight rounded-full inline-block"><i data-lucide="brain-circuit" class="h-6 w-6 text-primary"></i></div><div><h3 class="font-semibold">Marcelle Amstalden</h3><span class="text-xs bg-slate-100 text-slate-600 font-medium px-2 py-1 rounded-full">CAN</span></div></div>
+                    <ul class="space-y-1 text-sm text-muted-foreground list-disc list-inside"><li>Análise de dados quanti/quali</li><li>Criação de resumos executivos</li><li>Planejamento de experiências</li></ul>
+                </div>
+                <div class="card space-y-3">
+                    <div class="flex items-center gap-3"><div class="p-3 bg-primary-extralight rounded-full inline-block"><i data-lucide="lightbulb" class="h-6 w-6 text-primary"></i></div><div><h3 class="font-semibold">Jeniffer Santos</h3><span class="text-xs bg-slate-100 text-slate-600 font-medium px-2 py-1 rounded-full">MKT</span></div></div>
+                     <ul class="space-y-1 text-sm text-muted-foreground list-disc list-inside"><li>Planejamento estratégico</li><li>Criação de propostas</li><li>Assistência para decisão</li></ul>
+                </div>
+                <div class="card space-y-3">
+                    <div class="flex items-center gap-3"><div class="p-3 bg-primary-extralight rounded-full inline-block"><i data-lucide="layers" class="h-6 w-6 text-primary"></i></div><div><h3 class="font-semibold">Tayhu Oliveira</h3><span class="text-xs bg-slate-100 text-slate-600 font-medium px-2 py-1 rounded-full">PROD</span></div></div>
+                     <ul class="space-y-1 text-sm text-muted-foreground list-disc list-inside"><li>Design de Aprendizagem</li><li>Criação de ferramentas visuais</li><li>Apoio operacional e automação</li></ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- BLOCO REFINADO E REESTRUTURADO: Oportunidades -->
+        <section class="space-y-6">
+            <div class="text-left">
+                <h2 class="text-2xl font-bold tracking-tight">Para onde a gente pode ir agora</h2>
+                <p class="text-muted-foreground">A pesquisa foi um prato cheio. Separamos aqui os desejos e as dores que mais apareceram nas respostas</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="card space-y-3">
+                    <h3 class="text-lg font-semibold">Capacitação mão na massa</h3>
+                    <p class="text-muted-foreground text-sm">A galera não quer só saber 'o que' a IA faz, mas 'como' fazer direito. Os pedidos mais claros foram para aprender a criar prompts melhores, usar o ChatGPT 4 (não só a versão grátis) e criar materiais visuais mais rápido com ferramentas como Gamma.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="card space-y-3">
+                    <h3 class="text-lg font-semibold">Resolver as dores do dia a dia</h3>
+                    <p class="text-muted-foreground text-sm">A mensagem foi alta e clara: usar a IA para ganhar tempo e eficiência. As oportunidades mais citadas para começar já são:</p>
+                    <ul class="space-y-2 text-sm text-muted-foreground list-disc list-inside">
+                        <li>Melhorar nosso sistema interno (SYS)</li>
+                        <li>Automatizar a transcrição e o resumo de reuniões</li>
+                        <li>Analisar dados de clientes (NPS e qualitativos)</li>
+                        <li>Organizar bases de dados e planilhas</li>
+                    </ul>
+                </div>
+                <!-- Card 3 -->
+                <div class="card space-y-3">
+                    <h3 class="text-lg font-semibold">A fronteira da inovação</h3>
+                    <p class="text-muted-foreground text-sm">O time já enxerga longe. Vimos um desejo claro de usar IA para inovar lá na ponta, com ideias como a criação de agentes, a análise automatizada de dados de clientes no CRM e a customização de jornadas de aprendizagem.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Seção "Chamou Atenção" -->
+        <section class="space-y-6">
+             <div class="text-left">
+                <h2 class="text-2xl font-bold tracking-tight">O que mais chamou a atenção</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <blockquote class="card border-l-4 border-primary">
+                    <p class="italic">"Feliz por estarmos abordando esse tema de forma institucionalizada! ...ao invés de estar cada pessoa tentando usar e aprender no seu mundinho."</p>
+                    <footer class="mt-4 text-sm font-medium text-slate-500">— Lisiane Oliveira</footer>
+                </blockquote>
+                <blockquote class="card border-l-4 border-primary">
+                    <p class="italic">"...a LEAD como uma empresa de aprendizagem... precisa ter um posicionamento e uma formação interna sólida para preparar o time para usar IA com consciência e consistência."</p>
+                    <footer class="mt-4 text-sm font-medium text-slate-500">— Vitoria Garcia</footer>
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- Rodapé -->
+        <footer class="text-center pt-8 mt-8 border-t border-slate-200">
+            <p class="text-sm text-muted-foreground">© 2025 LEADedu | Análise para a Comunidade de Prática em IA</p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        lucide.createIcons();
+        Chart.register(ChartDataLabels);
+
+        const surveyData = {
+            frequencies: { 'Todos os dias': 5, 'Frequentemente': 7, 'Ocasionalmente': 5, 'Raramente': 1 },
+            tools: { 'ChatGPT': 14, 'Copilot': 9, 'Gemini': 4, 'DeepSeek': 3, 'Canva': 3, 'Outros': 8 },
+            useCases: { 'Escrita/Roteiros': 13, 'Geração de Ideias': 12, 'Otimização': 10, 'Análise de Dados': 7, 'Comunicação': 6, 'Planej. Cursos': 5 }
+        };
+
+        Chart.defaults.font.family = 'Inter, sans-serif';
+        
+        const frequencyCtx = document.getElementById('frequencyChart').getContext('2d');
+        new Chart(frequencyCtx, {
+            type: 'doughnut',
+            data: {
+                labels: Object.keys(surveyData.frequencies),
+                datasets: [{
+                    data: Object.values(surveyData.frequencies),
+                    backgroundColor: ['#4338ca', '#4f46e5', '#818cf8', '#c7d2fe'],
+                    borderColor: '#fff',
+                    borderWidth: 4,
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { 
+                    legend: { position: 'bottom', labels: { padding: 20, color: '#6b7280' } },
+                    datalabels: {
+                        color: '#fff',
+                        font: { weight: 'bold', size: 14 },
+                        formatter: (value, ctx) => {
+                            const sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                            const percentage = (value / sum * 100).toFixed(0) + '%';
+                            return percentage;
+                        }
+                    }
+                },
+                cutout: '60%'
+            }
+        });
+
+        const toolsCtx = document.getElementById('toolsChart').getContext('2d');
+        new Chart(toolsCtx, {
+            type: 'bar',
+            data: {
+                labels: Object.keys(surveyData.tools),
+                datasets: [{
+                    data: Object.values(surveyData.tools),
+                    backgroundColor: '#d8b4fe',
+                    hoverBackgroundColor: '#9333ea',
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                scales: { 
+                    y: { beginAtZero: true, grid: { drawBorder: false }, ticks: { color: '#6b7280' } },
+                    x: { grid: { display: false }, ticks: { color: '#6b7280' } }
+                },
+                plugins: { legend: { display: false }, datalabels: { display: false } }
+            }
+        });
+
+        const useCasesCtx = document.getElementById('useCasesChart').getContext('2d');
+        new Chart(useCasesCtx, {
+            type: 'bar',
+            data: {
+                labels: Object.keys(surveyData.useCases),
+                datasets: [{
+                    data: Object.values(surveyData.useCases),
+                    backgroundColor: '#6ee7b7',
+                    hoverBackgroundColor: '#059669',
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true, maintainAspectRatio: false,
+                scales: { 
+                    y: { grid: { display: false }, ticks: { color: '#6b7280' } },
+                    x: { beginAtZero: true, grid: { drawBorder: false }, ticks: { color: '#6b7280' } }
+                },
+                plugins: { legend: { display: false }, datalabels: { display: false } }
+            }
+        });
+    </script>
+</body>
+</html>
